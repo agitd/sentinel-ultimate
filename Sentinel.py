@@ -115,7 +115,7 @@ def main():
         send_telegram(header + body + footer)
         print(f"\n[*] Done. Found: {len(results)}. Log: {LOG_FILE}")
     else:
-        print("\n[-] No live hosts found.")s
+        print("\n[-] No live hosts found.")
 
 if __name__ == "__main__":
     try: main()
