@@ -7,3 +7,15 @@
 - **Service Auditing:** Checks for common administrative ports: SSH, HTTP, HTTPS, SMB, RDP, and more.
 - **Anti-Block Telegram Delivery:** Implements a multi-stage routing system (Direct, Proxy Mirrors, or personal Cloudflare Workers) to bypass ISP restrictions and DPI.
 - **Persistent Logging:** Automatically saves every scan session to `scan_history.log`.
+# INSTALL requirements: pip install requests
+# 1. Clone the repository
+git clone https://github.com/agitd/sentinel-ultimate.git
+
+# 2. Enter the project folder
+cd sentinel-ultimate
+
+# 3. Install the required library
+pip install requests
+
+# 4. Run the scanner
+python3 sentinel.py
