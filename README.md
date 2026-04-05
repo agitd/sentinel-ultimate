@@ -20,7 +20,7 @@ pip install requests
 # 4. Run the scanner
 python3 sentinel.py
 
-Usage (Аргументы запуска)
+Usage
 
 Sentinel Ultimate now supports CLI arguments for better automation:
 
