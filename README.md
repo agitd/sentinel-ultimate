@@ -19,3 +19,22 @@ pip install requests
 
 # 4. Run the scanner
 python3 sentinel.py
+
+Usage (Аргументы запуска)
+
+Sentinel Ultimate now supports CLI arguments for better automation:
+
+| Flag | Description | Example |
+| :--- | :--- | :--- |
+| `-n` | **Network** (Required) | `-n 192.168.1.0/24` |
+| `-t` | **Threads** (Default: 60) | `-t 100` |
+| `-f` | **Format** (json/csv) | `-f json` |
+| `--silent`| **No Telegram** | `--silent` |
+
+### Examples:
+```bash
+# Scan and save to CSV
+python3 Sentinel.py -n 192.168.1.0/24 -f csv
+
+# Fast scan without Telegram notifications
+python3 Sentinel.py -n 10.0.0.0/24 -t 120 --silent
