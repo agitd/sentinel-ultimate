@@ -29,6 +29,20 @@ cp env.example .env
 python3 Sentinel.py -n 192.168.1.0/24
 
 ## CLI Arguments
+| `-t` | **Threads** (Default: 60) | `-t 100` |
+| `-f` | **Format** (json/csv) | `-f json` |
+| `--silent`| **No Telegram** | `--silent` |
+
+### Examples:
+```bash
+# Basic scan (Auto-detects Windows/Linux)
+python3 Sentinel.py -n 192.168.1.0/24
+
+# Scan and save to CSV with timestamps
+python3 Sentinel.py -n 192.168.1.0/24 -f csv
+
+# Fast scan without Telegram notifications
+python3 Sentinel.py -n 10.0.0.0/24 -t 120 --silent
 
 | Flag | Description | Example |
 | :--- | :--- | :--- |
