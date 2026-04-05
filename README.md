@@ -1,4 +1,4 @@
-# Sentinel Ultimate v7.1 
+# Sentinel Ultimate v7.1
 
 **Sentinel Ultimate** is a high-speed network intelligence tool designed for Kali Linux and security enthusiasts. It efficiently scans subnets, identifies active hosts, resolves hostnames, and audits critical open ports.
 
@@ -7,7 +7,11 @@
 - **Service Auditing:** Checks for common administrative ports: SSH, HTTP, HTTPS, SMB, RDP, and more.
 - **Anti-Block Telegram Delivery:** Implements a multi-stage routing system (Direct, Proxy Mirrors, or personal Cloudflare Workers) to bypass ISP restrictions and DPI.
 - **Persistent Logging:** Automatically saves every scan session to `scan_history.log`.
-# INSTALL requirements: pip install requests
+- **CLI Arguments:** Full support for command-line flags for better automation.
+- **Data Export:** Ability to save scan results in JSON or CSV formats.
+
+## Installation & Usage
+
 # 1. Clone the repository
 git clone https://github.com/agitd/sentinel-ultimate.git
 
@@ -17,12 +21,13 @@ cd sentinel-ultimate
 # 3. Install the required library
 pip install requests
 
-# 4. Run the scanner
-python3 sentinel.py
+# 4. Configuration (Optional)
+# Rename .env.example to .env and add your Telegram credentials
 
-Usage
+# 5. Run the scanner
+python3 Sentinel.py -n 192.168.1.0/24
 
-Sentinel Ultimate now supports CLI arguments for better automation:
+## CLI Arguments
 
 | Flag | Description | Example |
 | :--- | :--- | :--- |
