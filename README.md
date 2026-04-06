@@ -27,7 +27,7 @@ pip install -r requirements.txt
 # 5. Run the scanner
 python3 Sentinel.py -n 192.168.1.0/24
 
-Usage (Аргументы запуска)
+Usage
 
 Sentinel Ultimate v9.6 supports advanced CLI commands for deep infrastructure auditing:
 
