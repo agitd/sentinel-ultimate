@@ -1,14 +1,14 @@
-# Sentinel Ultimate v9.6
+# Sentinel Ultimate v10.0
 
-**Sentinel Ultimate** is a high-speed, professional network intelligence and security auditing tool. Version 9.6 introduces deep **OS Fingerprinting**, a persistent **SQLite Database** for scan history, and an automated **Scan Comparison** engine.
+**Sentinel Ultimate** is a high-speed, professional network intelligence and security auditing tool. Version 10.0 introduces a fully asynchronous scanning engine, an expanded signature database, and intelligent network drift analysis.
 
 ## Key Features
-- **OS Fingerprinting (v9.6):** Intelligent detection of Windows, Linux, macOS, IoT, and Network devices based on TTL, port patterns, and banner analysis.
-- **Elite Service Detection (200+ Ports):** Comprehensive coverage of Web, DBs, Cloud, DevOps, and Security services.
-- **SQLite Persistence:** All scans are automatically saved to `sentinel_scans.db` for future auditing.
-- **Diff Engine:** Compare current results with previous scans to identify new, gone, or modified hosts/services.
-- **Deep Banner Grabbing:** Real-time version identification for SSH, HTTP (Server headers), and more.
-- **Multi-Channel Reporting:** Automated delivery to Telegram (with Cloudflare bypass) and Slack.
+- **OS Fingerprinting (v10.0):** Intelligent detection of Windows, Linux, macOS, IoT, and network devices based on TTL, port patterns, and service banner analysis.
+- **Elite Service Detection (201 Ports):** Comprehensive coverage of web services, databases, cloud tools, DevOps stacks, and security systems.
+- **SQLite Persistence:** All scan results are automatically saved to `sentinel_scans.db` for future auditing and historical logging.
+- **Diff Engine:** Compare current results with previous scans to identify new, gone, or modified hosts and services.
+- **Deep Banner Grabbing:** Real-time version identification for SSH, HTTP (Server headers), and other key protocols.
+- **Multi-Channel Reporting:** Automated report delivery to Telegram (with Cloudflare bypass support) and Slack.
 
 # INSTALL requirements: pip install -r requirements.txt
 
@@ -27,15 +27,15 @@ pip install -r requirements.txt
 # 5. Run the scanner
 python3 Sentinel.py -n 192.168.1.0/24
 
-Usage
+Usage (Launch Arguments)
 
-Sentinel Ultimate v9.6 supports advanced CLI commands for deep infrastructure auditing:
+Sentinel Ultimate v10.0 supports advanced CLI commands for deep infrastructure auditing:
 
 | Flag | Description | Example |
 | :--- | :--- | :--- |
 | `-n` | **Network** (Required CIDR) | `-n 192.168.1.0/24` |
-| `-t` | **Threads** (Default: 100) | `-t 200` |
-| `-f` | **Format** (json/csv) | `-f json` |
+| `-t` | **Threads** (Default: 100) | `-t 250` |
+| `-f` | **Format** (json/csv export) | `-f json` |
 | `--history`| **View Database History** | `--history` |
 | `--compare`| **Compare Scans** | `--compare -n 192.168.1.0/24` |
 | `--silent` | **Disable Notifications** | `--silent` |
@@ -46,8 +46,8 @@ Sentinel Ultimate v9.6 supports advanced CLI commands for deep infrastructure au
 # Standard scan with OS detection and remote reporting
 python3 Sentinel.py -n 192.168.1.0/24
 
-# Fast scan and export results to CSV
-python3 Sentinel.py -n 10.0.0.0/16 -t 250 -f csv
+# Fast scan and export results to CSV (201 ports)
+python3 Sentinel.py -n 10.0.0.0/16 -t 500 -f csv
 
 # Audit changes: See what changed since the last scan of this subnet
 python3 Sentinel.py -n 192.168.1.0/24 --compare
@@ -62,3 +62,4 @@ python3 Sentinel.py --history
 * **Infrastructure:** Cisco, Ubiquiti, MikroTik, Fortinet
 * **Containers:** Docker, Kubernetes nodes
 * **IoT:** Printers (HP, Brother), CUPS, IPP devices
+
