@@ -9,6 +9,7 @@ import csv
 import platform
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
+from dotenv import load_dotenv  # Добавлено: импорт для работы с .env
 
 # ==================== [ CONFIGURATION ] ====================
 VERSION = "7.2"
@@ -48,7 +49,6 @@ def parse_arguments():
 
 def get_ping_command(ip):
     """Определение ОС и выбор правильной команды ping"""
-    # Windows использует -n, Linux/macOS использует -c
     param = '-n' if platform.system().lower() == 'windows' else '-c'
     return ['ping', param, '1', '-W', '1', str(ip)]
 
@@ -122,7 +122,6 @@ def scan_host(ip):
     """Сканирование одного хоста"""
     ip_str = str(ip)
     try:
-        # Кроссплатформенный пинг
         p = subprocess.run(get_ping_command(ip_str),
                            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
@@ -141,9 +140,9 @@ def scan_host(ip):
     return None
 
 def main():
+    load_dotenv()  # Добавлено: загрузка переменных окружения из .env файла
     args = parse_arguments()
 
-    # Очистка консоли (cls для Win, clear для Linux)
     os.system('cls' if platform.system().lower() == 'windows' else 'clear')
     print(BANNER)
 
@@ -159,19 +158,16 @@ def main():
         results = [r for r in list(executor.map(scan_host, network.hosts())) if r]
 
     if results:
-        # Вывод в консоль
         print(f"\n{'IP ADDRESS'.ljust(17)} | {'HOSTNAME'.ljust(15)} | SERVICES")
         print("-" * 65)
         for r in results:
             print(f"{r['ip'].ljust(17)} | {r['name'][:15].ljust(15)} | {r['ports']}")
 
-        # Логирование и экспорт
         if args.format == "json":
             save_json(results)
         elif args.format == "csv":
             save_csv(results)
 
-        # Отчет в Telegram
         if not args.silent:
             header = f"📡 *Sentinel v{VERSION} Report*\nTarget: `{args.network}`\n\n"
             body = "\n".join([r['tg'] for r in results])

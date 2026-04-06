@@ -1,17 +1,13 @@
-# Sentinel Ultimate v7.2
+# Sentinel Ultimate v7.0 
 
-**Sentinel Ultimate** is a high-speed network intelligence tool designed for Kali Linux and security enthusiasts. It efficiently scans subnets, identifies active hosts, resolves hostnames, and audits critical open ports. Now with full cross-platform support.
+**Sentinel Ultimate** is a high-speed network intelligence tool designed for Kali Linux and security enthusiasts. It efficiently scans subnets, identifies active hosts, resolves hostnames, and audits critical open ports.
 
 ## Key Features
 - **Multi-threaded Engine:** Powered by `ThreadPoolExecutor` for rapid network discovery.
 - **Service Auditing:** Checks for common administrative ports: SSH, HTTP, HTTPS, SMB, RDP, and more.
-- **Cross-Platform Support (New!):** Automatically detects OS (Windows/Linux) and adjusts scanning logic.
-- **Anti-Block Telegram Delivery:** Implements a multi-stage routing system (Direct, Proxy Mirrors, or personal Cloudflare Workers).
-- **Advanced Export:** Save scan results with timestamps in JSON or CSV formats.
+- **Anti-Block Telegram Delivery:** Implements a multi-stage routing system (Direct, Proxy Mirrors, or personal Cloudflare Workers) to bypass ISP restrictions and DPI.
 - **Persistent Logging:** Automatically saves every scan session to `scan_history.log`.
-
-## Installation & Usage
-
+# INSTALL requirements: pip install requests
 # 1. Clone the repository
 git clone https://github.com/agitd/sentinel-ultimate.git
 
@@ -21,14 +17,12 @@ cd sentinel-ultimate
 # 3. Install the required library
 pip install requests
 
-# 4. Configuration (v7.2)
-# Copy the environment template and add your Telegram credentials
-cp env.example .env
+# 4. Run the scanner
+python3 sentinel.py
 
-# 5. Run the scanner
-python3 Sentinel.py -n 192.168.1.0/24
+Usage (Аргументы запуска)
 
-## CLI Arguments
+Sentinel Ultimate now supports CLI arguments for better automation:
 
 | Flag | Description | Example |
 | :--- | :--- | :--- |
@@ -39,10 +33,7 @@ python3 Sentinel.py -n 192.168.1.0/24
 
 ### Examples:
 ```bash
-# Basic scan (Auto-detects Windows/Linux)
-python3 Sentinel.py -n 192.168.1.0/24
-
-# Scan and save to CSV with timestamps
+# Scan and save to CSV
 python3 Sentinel.py -n 192.168.1.0/24 -f csv
 
 # Fast scan without Telegram notifications
