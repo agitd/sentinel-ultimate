@@ -25,7 +25,7 @@ pip install -r requirements.txt
 # Note: Ensure your .env file is configured in the root directory
 python3 Sentinel.py -n 192.168.1.0/24
 
-Usage (Аргументы запуска)
+Usage
 
 Sentinel Ultimate v9.0 supports advanced CLI arguments for granular control:
 
