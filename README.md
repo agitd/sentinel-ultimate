@@ -8,7 +8,6 @@
 - **CVE Integration:** Real-time vulnerability lookup for detected service versions via API.
 - **SQLite Persistence:** All scan results are automatically saved to `sentinel_scans.db` for future auditing and historical logging.
 - **Diff Engine:** Compare current results with previous scans to identify new, gone, or modified hosts and services.
-- **Automated Privilege Elevation:** Built-in logic to restart with sudo for ARP scanning on Linux systems.
 - **Multi-Channel Reporting:** Support for PDF reports, JSON/CSV exports, and notifications via Telegram (with proxy support) or Slack.
 
 ## Installation
