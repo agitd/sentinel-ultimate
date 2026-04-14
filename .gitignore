@@ -1,5 +1,18 @@
 *.log
 __pycache__/
-scan_*.json
-scan_*.csv
+*.pyc
+*.pyo
+*.pyd
+
+# Data and Reports
+*.json
+*.csv
+*.pdf
+*.db
+
+# Environment and Local
 .env
+.venv
+env/
+venv/
+.pytest_cache/
