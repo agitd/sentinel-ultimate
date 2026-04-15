@@ -1,9 +1,9 @@
 # Sentinel Ultimate v11.1
 
-**Sentinel Ultimate** is a high-speed, professional network intelligence and security auditing tool. Version 11.0 introduces a fully asynchronous scanning engine, an expanded signature database (200+ ports), and automated CVE vulnerability lookup.
+**Sentinel Ultimate** is a high-speed, professional network intelligence and security auditing tool. Version 11.1 introduces a fully asynchronous scanning engine, an expanded signature database (200+ ports), and automated CVE vulnerability lookup.
 
 ## Key Features
-- **OS Fingerprinting (v11.0):** Intelligent detection of Windows, Linux, macOS, IoT, and containers based on port patterns and weighted banner analysis.
+- **OS Fingerprinting (v11.1):** Intelligent detection of Windows, Linux, macOS, IoT, and containers based on port patterns and weighted banner analysis.
 - **Elite Service Detection (200+ Ports):** Comprehensive coverage of web services, databases, DevOps stacks, and security systems.
 - **Go-Powered Fuzzing:** Integrated high-speed directory fuzzer (Go-engine) running inside Docker for web service auditing.
 - **CVE Integration:** Real-time vulnerability lookup for detected service versions via API.
