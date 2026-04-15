@@ -1,7 +1,7 @@
 import os
 from typing import Dict, Any
 
-VERSION = "11.0"
+VERSION = "11.1"
 DB_FILE = "sentinel_scans.db"
 DEFAULT_THREADS = 100
 
@@ -69,6 +69,10 @@ OS_SIGNATURES: Dict[str, Dict[str, Any]] = {
     'Printer/IoT Device': {'patterns': [r'HP|Canon|Xerox|Brother|Printer|CUPS|IPP'], 'ports': [631, 515, 9100], 'confidence': 65},
     'Docker/Container': {'patterns': [r'Docker|Container|Kubernetes|X-Docker'], 'ports': [2375, 2376, 10250], 'confidence': 88},
 }
+#Настройки Go-фаззера докер
+DOCKER_IMAGE = "sentinel-fuzzer"
+DEFAULT_WORDLIST = "list.txt", "list2.txt" #Файл должен лежать в корне проекта
+FUZZ_THREADS = 50
 
 BANNER = rf"""
   _____            _   _             _
@@ -108,5 +112,12 @@ HELP_EXAMPLES = """
 
 🧪 RUN TESTS:
   python3 -m pytest tests/ -v
+
+🚀 (NEW!)WEB FUZZING (GO-ENGINE):
+  python3 main.py -n 192.168.1.0/24 --fuzz
+
+⚡ (NEW!)FUZZING WITH CUSTOM WORDLIST:
+  python3 main.py -n 192.168.1.0/24 --fuzz -t 50
+
 """
 

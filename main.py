@@ -5,6 +5,8 @@ from database.manager import ScanDatabase
 from core.arp_scanner import scan_network
 from utils.notifier import send_notification
 from utils.reporting import generate_pdf_report, export_to_json, export_to_csv
+# Дополнил импортом нового модуля для Docker
+from core.fuzzer import run_go_fuzzer
 
 # Импорт pytest для внутренней обработки флага -m
 try:
@@ -28,9 +30,12 @@ async def main():
     parser.add_argument("--compare", action="store_true")
     parser.add_argument("--history", action="store_true", help="Show history")
 
-    # ЛОГИКА ДЛЯ ТВОЕГО ЗАПРОСА: добавляем поддержку -m и сбор всех аргументов после него
+    # ЛОГИКА ДЛЯ ЗАПРОСА: добавил поддержку -m и сбор всех аргументов после него
     parser.add_argument("-m", nargs='*', help="Run pytest tests")
     parser.add_argument("-v", action="store_true", help="Verbose mode for pytest")
+
+    # ДОПОЛНЕНИЕ: флаг для активации Go-фаззера
+    parser.add_argument("--fuzz", action="store_true", help="Run Go-fuzzer on detected web services")
 
     args, unknown = parser.parse_known_args()
 
@@ -40,7 +45,7 @@ async def main():
             print("[-] Error: pytest not installed. Run: pip install pytest")
             return
         print("[*] Launching internal tests...")
-        # Собрал аргументы: если после -m что-то есть (типа pytest tests/ -v), берёт их
+        # Собирает аргументы: если после -m что-то есть (типа pytest tests/ -v), берёт их
         test_args = args.m if args.m else ['tests/']
         if args.v: test_args.append('-v')
 
@@ -105,6 +110,20 @@ async def main():
             if diff and (diff['new'] or diff['changed']):
                 report += "\n\n⚠️ *Network changes detected!*"
             send_notification(report, 'telegram')
+
+        # ДОПОЛНЕНИЕ ЛОГИКИ: запуск Go-фаззера если поднят флаг --fuzz
+        if args.fuzz:
+            print("\n🚀 Starting Go-fuzzer for web services...")
+            for r in results:
+                # Проверяет наличие веб-сервисов в найденных портах
+                if any(web_port in r['ports'] for web_port in ["80", "443", "8080", "HTTPS", "HTTP"]):
+                    # Определяет протокол
+                    protocol = "https" if "443" in r['ports'] or "HTTPS" in r['ports'] else "http"
+                    target_url = f"{protocol}://{r['ip']}"
+
+                    # Запускает наш Docker-мост
+                    await run_go_fuzzer(target_url)
+
     else:
         print("\n[-] No hosts found. Use sudo for ARP scan.")
 
@@ -113,4 +132,6 @@ if __name__ == "__main__":
         asyncio.run(main())
     except KeyboardInterrupt:
         print("\n[!] Stopped by user.")
+
+
 

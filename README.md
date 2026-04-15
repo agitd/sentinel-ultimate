@@ -1,10 +1,11 @@
-# Sentinel Ultimate v11.0
+# Sentinel Ultimate v11.1
 
 **Sentinel Ultimate** is a high-speed, professional network intelligence and security auditing tool. Version 11.0 introduces a fully asynchronous scanning engine, an expanded signature database (200+ ports), and automated CVE vulnerability lookup.
 
 ## Key Features
 - **OS Fingerprinting (v11.0):** Intelligent detection of Windows, Linux, macOS, IoT, and containers based on port patterns and weighted banner analysis.
 - **Elite Service Detection (200+ Ports):** Comprehensive coverage of web services, databases, DevOps stacks, and security systems.
+- **Go-Powered Fuzzing:** Integrated high-speed directory fuzzer (Go-engine) running inside Docker for web service auditing.
 - **CVE Integration:** Real-time vulnerability lookup for detected service versions via API.
 - **SQLite Persistence:** All scan results are automatically saved to `sentinel_scans.db` for future auditing and historical logging.
 - **Diff Engine:** Compare current results with previous scans to identify new, gone, or modified hosts and services.
@@ -13,20 +14,28 @@
 ## Installation
 
 # 1. Clone the repository
-git clone https://github.com/youruser/sentinel-ultimate.git
+git clone https://github.com/agitd/sentinel-ultimate.git
 
 # 2. Enter the project folder
 cd sentinel-ultimate
 
-# 3. Install dependencies
+# 3. Install System Dependencies (Required for Scapy)
+sudo apt update && sudo apt install libpcap-dev
+
+# 4. Install Python dependencies
 pip install -r requirements.txt
 
-# 4. Configure Environment
+# 5. Build Go-Fuzzer Engine (Docker)
+cd fuzzer-engine
+docker build -t sentinel-fuzzer .
+cd ..
+
+# 6. Configure Environment
 # Rename .env.example to .env and fill in your API tokens:
-mv env.example .env
+mv .env.example .env
 nano .env  # Fill in TG_TOKEN, TG_CHAT_ID, etc.
 
-# 5. Run the scanner
+# 7. Run the scanner
 python3 main.py -n 192.168.1.0/24
 
 ## Usage (Launch Arguments)
@@ -37,6 +46,7 @@ python3 main.py -n 192.168.1.0/24
 | `-t` | **Threads** (Default: 200) | `-t 500` |
 | `-f` | **Format** (pdf/json/csv export) | `-f pdf` |
 | `-m` | **Run Internal Tests** (pytest) | `-m pytest -v` |
+| `--fuzz`| **Run Go-Fuzzer on Web Ports** | `--fuzz` |
 | `--history`| **View Database History** | `--history` |
 | `--compare`| **Compare Scans** | `--compare -n 192.168.1.0/24` |
 | `--silent` | **Disable Notifications** | `--silent` |
@@ -46,6 +56,9 @@ python3 main.py -n 192.168.1.0/24
 
 # Standard scan with OS detection and reporting
 python3 main.py -n 192.168.1.0/24
+
+# Scan with automated Web Fuzzing (Go-Engine)
+python3 main.py -n 192.168.1.0/24 --fuzz
 
 # Scan and export results to PDF
 python3 main.py -n 10.0.0.0/16 -f pdf
@@ -66,3 +79,4 @@ python3 main.py -m
 * **Infrastructure:** Cisco, Ubiquiti, MikroTik, Fortinet
 * **Containers:** Docker, Kubernetes nodes
 * **IoT:** Printers (HP, Brother), CUPS, IPP devices
+
