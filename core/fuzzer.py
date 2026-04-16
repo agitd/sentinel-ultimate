@@ -1,69 +1,87 @@
 import asyncio
-import subprocess
 import os
 import json
 import logging
 
 logger = logging.getLogger(__name__)
 
-async def run_go_fuzzer(target_url: str, wordlist: str = "list.txt"):
+async def run_go_fuzzer(target_url: str, wordlist: str = "fuzz.txt"):
     """
-    Запуск Go-фаззера внутри Docker контейнера.
-    Интеграция с Sentinel v11.0
+    Sentinel V13.0: Исправлены права доступа, пути и добавлен Fallback сохранения.
     """
-    current_dir = os.getcwd()
-    report_path = "reports/results.json" # Путь к файлу, который создает Go-движок
+    current_file_dir = os.path.dirname(os.path.abspath(__file__))
+    wordlist_dir = os.path.abspath(os.path.join(current_file_dir, "..", "fuzzer-engine"))
+    reports_dir = os.path.abspath(os.path.join(current_file_dir, "..", "reports"))
 
-    if not os.path.exists("reports"):
-        os.makedirs("reports")
+    if not os.path.exists(reports_dir):
+        os.makedirs(reports_dir)
 
+    # ПРИНУДИТЕЛЬНЫЙ FIX ПРАВ: чтобы Docker точно мог писать
+    os.system(f"chmod 777 {reports_dir}")
+
+    # Уникальное имя файла
+    clean_host = target_url.replace("https://", "").replace("http://", "").rstrip('/').replace(".", "_").replace("/", "_")
+    report_file = f"results_{clean_host}.json"
+    report_path_host = os.path.join(reports_dir, report_file)
+
+    target_url = target_url.rstrip('/')
+
+    # КОМАНДА DOCKER
     command = [
-        "docker", "run", "--rm",
-        "-v", f"{current_dir}:/root/",
+        "docker", "run", "--rm", "-i",
+        "--user", f"{os.getuid()}:{os.getgid()}",
+        "-v", f"{wordlist_dir}:/app/wordlists",
+        "-v", f"{reports_dir}:/app/reports",
         "sentinel-fuzzer",
         "-u", target_url,
-        "-w", wordlist,
-        "-t", "50"
-        # Убрал -v, чтобы не забивать консоль лишним мусором, оставил только хиты
+        "-w", f"/app/wordlists/{wordlist}",
+        "-o", f"/app/reports/{report_file}",
+        "-t", "100"
     ]
 
-    print(f"[*] Launching Go-engine for: {target_url}")
+    print(f"\n" + "="*50)
+    print(f"[*] SENTINEL ENGINE START")
+    print(f"[*] Target: {target_url}")
+    print(f"[*] Report: reports/{report_file}")
+    print("="*50 + "\n")
 
     try:
+        #stdout=PIPE чтобы перехватить данные если Docker накосячит с записью
         process = await asyncio.create_subprocess_exec(
             *command,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE
         )
 
-        stdout, stderr = await process.communicate()
+        # Читает вывод в реальном времени, чтобы не сидеть в тишине
+        output_list = []
+        while True:
+            line = await process.stdout.readline()
+            if not line:
+                break
+            line_decoded = line.decode().strip()
+            print(line_decoded) # Вывод в консоль
+            output_list.append(line_decoded) # Сохраняем в память
 
+        await process.wait()
+
+        print("\n" + "-" * 50)
         if process.returncode == 0:
-            print(f"[+] Fuzzing completed for {target_url}")
+            print(f"[+] Scan finished successfully.")
 
-            # --- ЛОГИКА ДЛЯ ЗАПРОСА: Чтение и вывод результатов ---
-            if os.path.exists(report_path):
-                try:
-                    with open(report_path, "r") as f:
-                        results = json.load(f)
-                        if results:
-                            print(f"\n🔥 FOUND ON {target_url}:")
-                            for res in results:
-                                # Выводит статус и путь (например: [200] /admin)
-                                print(f"  [{res.get('status')}] {res.get('url')}")
-                        else:
-                            print(f"[-] No paths found on {target_url}")
-                except Exception as e:
-                    print(f"[-] Error reading reports: {e}")
-            # -----------------------------------------------------------
-
-        else:
-            error_msg = stderr.decode()
-            if "Permission denied" in error_msg:
-                print(f"[-] Docker Error: Permission denied.")
+            # --- ГИБРИДНАЯ ПРОВЕРКА СОХРАНЕНИЯ ---
+            if os.path.exists(report_path_host) and os.path.getsize(report_path_host) > 0:
+                print(f"🔥 Отчет сохранен движком: {report_path_host}")
             else:
-                logger.error(f"Fuzzer error: {error_msg}")
+                # Если файл пуст или не создался - включает Python Fallback
+                print(f"[*] Fallback: Сохраняю вывод через Python...")
+                with open(report_path_host, "w") as f:
+                    f.write("\n".join(output_list))
+                print(f"🔥 Отчет принудительно сохранен: {report_path_host}")
+        else:
+            _, stderr = await process.communicate()
+            print(f"[-] Engine error: {stderr.decode()}")
 
     except Exception as e:
-        print(f"[-] Failed to run Docker: {e}")
+        print(f"[-] Execution error: {e}")
 

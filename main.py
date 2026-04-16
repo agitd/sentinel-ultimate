@@ -2,13 +2,14 @@ import argparse, asyncio, os, logging, sys
 from dotenv import load_dotenv
 from config.settings import BANNER, HELP_EXAMPLES
 from database.manager import ScanDatabase
-from core.arp_scanner import scan_network
+# ИСПРАВЛЕНИЕ 1: Добавил импорт scan_host, чтобы вызывать его напрямую
+from core.arp_scanner import scan_network, scan_host
 from utils.notifier import send_notification
 from utils.reporting import generate_pdf_report, export_to_json, export_to_csv
-# Дополнил импортом нового модуля для Docker
+# Дополняем импортом нашего нового модуля для Docker
 from core.fuzzer import run_go_fuzzer
 
-# Импорт pytest для внутренней обработки флага -m
+# Импортирт pytest для внутренней обработки флага -m
 try:
     import pytest
 except ImportError:
@@ -45,7 +46,7 @@ async def main():
             print("[-] Error: pytest not installed. Run: pip install pytest")
             return
         print("[*] Launching internal tests...")
-        # Собирает аргументы: если после -m что-то есть (типа pytest tests/ -v), берёт их
+        # Собирает аргументы: если после -m что-то есть (типа pytest tests/ -v), берет их
         test_args = args.m if args.m else ['tests/']
         if args.v: test_args.append('-v')
 
@@ -77,6 +78,13 @@ async def main():
 
     # Сканирование
     results = await scan_network(args.network)
+
+    # ИСПРАВЛЕНИЕ 2: Если ARP (results) пустой и это не подсеть (нет /), запускает сканер портов напрямую
+    if not results and "/" not in args.network:
+        print("[!] No ARP response. Switching to Direct Scan mode...")
+        direct_res = await scan_host(args.network)
+        if direct_res:
+            results = [direct_res]
 
     if results:
         print(f"\n{'IP ADDRESS'.ljust(17)} | {'OS'.ljust(20)} | SERVICES\n" + "-"*90)
@@ -115,23 +123,22 @@ async def main():
         if args.fuzz:
             print("\n🚀 Starting Go-fuzzer for web services...")
             for r in results:
-                # Проверяет наличие веб-сервисов в найденных портах
+                # Проверка наличия веб-сервисов в найденных портах
                 if any(web_port in r['ports'] for web_port in ["80", "443", "8080", "HTTPS", "HTTP"]):
-                    # Определяет протокол
+                    # Определение протокола
                     protocol = "https" if "443" in r['ports'] or "HTTPS" in r['ports'] else "http"
                     target_url = f"{protocol}://{r['ip']}"
 
-                    # Запускает наш Docker-мост
+                    # Запуск Docker-моста
                     await run_go_fuzzer(target_url)
 
     else:
-        print("\n[-] No hosts found. Use sudo for ARP scan.")
+        # Убрал упоминание "Use sudo", так как теперь скрипт сам пробует Direct Scan
+        print("\n[-] No hosts found. Target might be offline or protected by firewall.")
 
 if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
         print("\n[!] Stopped by user.")
-
-
 

@@ -1,7 +1,7 @@
 import os
 from typing import Dict, Any
 
-VERSION = "11.1"
+VERSION = "13.0"
 DB_FILE = "sentinel_scans.db"
 DEFAULT_THREADS = 100
 
@@ -113,11 +113,17 @@ HELP_EXAMPLES = """
 🧪 RUN TESTS:
   python3 -m pytest tests/ -v
 
-🚀 (NEW!)WEB FUZZING (GO-ENGINE):
+🚀 WEB FUZZING (GO-ENGINE):
   python3 main.py -n 192.168.1.0/24 --fuzz
 
-⚡ (NEW!)FUZZING WITH CUSTOM WORDLIST:
+⚡ FUZZING WITH CUSTOM WORDLIST:
   python3 main.py -n 192.168.1.0/24 --fuzz -t 50
+
+  MASS SCAN
+  python3 mass_scan.py -t targets.txt
+
+  SCAN ANALYZE
+  python3 analyze.py
 
 """
 

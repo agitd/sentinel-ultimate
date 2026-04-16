@@ -1,9 +1,9 @@
-# Sentinel Ultimate v11.1
+# Sentinel Ultimate v13.0
 
-**Sentinel Ultimate** is a high-speed, professional network intelligence and security auditing tool. Version 11.1 introduces a fully asynchronous scanning engine, an expanded signature database (200+ ports), and automated CVE vulnerability lookup.
+**Sentinel Ultimate** is a high-speed, professional network intelligence and security auditing tool. Version 13.0 introduces a fully asynchronous scanning engine, an expanded signature database (200+ ports), and automated CVE vulnerability lookup.
 
 ## Key Features
-- **OS Fingerprinting (v11.1):** Intelligent detection of Windows, Linux, macOS, IoT, and containers based on port patterns and weighted banner analysis.
+- **OS Fingerprinting (v13.0):** Intelligent detection of Windows, Linux, macOS, IoT, and containers based on port patterns and weighted banner analysis.
 - **Elite Service Detection (200+ Ports):** Comprehensive coverage of web services, databases, DevOps stacks, and security systems.
 - **Go-Powered Fuzzing:** Integrated high-speed directory fuzzer (Go-engine) running inside Docker for web service auditing.
 - **CVE Integration:** Real-time vulnerability lookup for detected service versions via API.
@@ -72,6 +72,9 @@ python3 main.py --history
 # Launch internal unit tests
 python3 main.py -m
 
+# Advanced: Mass scan from target list followed by automated security analysis
+python3 main.py -t targets.txt -w wordlist.txt && python3 analyze.py --input results/
+
 ## OS Fingerprinting Support
 * **Linux:** Ubuntu, Debian, CentOS, RHEL, Fedora
 * **Windows:** Workstations, Servers, Active Directory nodes
@@ -79,4 +82,7 @@ python3 main.py -m
 * **Infrastructure:** Cisco, Ubiquiti, MikroTik, Fortinet
 * **Containers:** Docker, Kubernetes nodes
 * **IoT:** Printers (HP, Brother), CUPS, IPP devices
+
+## Disclaimer
+This tool is developed for educational purposes and authorized security auditing only. The author is not responsible for any damage caused by misuse of this software. Always obtain permission before scanning any network.
 
