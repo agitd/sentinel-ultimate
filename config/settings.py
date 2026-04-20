@@ -1,14 +1,22 @@
 import os
 from typing import Dict, Any
 
-VERSION = "13.0"
+VERSION = "13.5"
 DB_FILE = "sentinel_scans.db"
 DEFAULT_THREADS = 100
 
+# Настройки уведомлений
 TELEGRAM_TOKEN = os.getenv("TG_TOKEN", "YOUR_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TG_CHAT_ID", "YOUR_CHAT_ID")
 CF_WORKER_URL = os.getenv("CF_WORKER", "")
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK", "")
+
+# --- AI ANALYZER SETTINGS (Локальный анализ через Ollama) ---
+AI_ENABLED = os.getenv("AI_ENABLED", "True").lower() == "true"
+AI_PROVIDER = "ollama"
+AI_API_URL = "http://localhost:11434/api/generate"
+AI_MODEL = "llama3"
+# ----------------------------------------------------------
 
 PORTS_TO_CHECK: Dict[int, str] = {
     80: "HTTP", 8080: "HTTP-Alt", 8000: "HTTP-Dev", 8888: "HTTP-Dev2", 443: "HTTPS", 8443: "HTTPS-Alt",
@@ -69,10 +77,6 @@ OS_SIGNATURES: Dict[str, Dict[str, Any]] = {
     'Printer/IoT Device': {'patterns': [r'HP|Canon|Xerox|Brother|Printer|CUPS|IPP'], 'ports': [631, 515, 9100], 'confidence': 65},
     'Docker/Container': {'patterns': [r'Docker|Container|Kubernetes|X-Docker'], 'ports': [2375, 2376, 10250], 'confidence': 88},
 }
-#Настройки Go-фаззера докер
-DOCKER_IMAGE = "sentinel-fuzzer"
-DEFAULT_WORDLIST = "list.txt", "list2.txt" #Файл должен лежать в корне проекта
-FUZZ_THREADS = 50
 
 BANNER = rf"""
   _____            _   _             _
@@ -118,12 +122,4 @@ HELP_EXAMPLES = """
 
 ⚡ FUZZING WITH CUSTOM WORDLIST:
   python3 main.py -n 192.168.1.0/24 --fuzz -t 50
-
-  MASS SCAN
-  python3 mass_scan.py -t targets.txt
-
-  SCAN ANALYZE
-  python3 analyze.py
-
 """
-

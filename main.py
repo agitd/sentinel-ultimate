@@ -1,13 +1,12 @@
 import argparse, asyncio, os, logging, sys
 from dotenv import load_dotenv
-from config.settings import BANNER, HELP_EXAMPLES
+from config.settings import BANNER, HELP_EXAMPLES, AI_ENABLED # Добавил AI_ENABLED
 from database.manager import ScanDatabase
-# ИСПРАВЛЕНИЕ 1: Добавил импорт scan_host, чтобы вызывать его напрямую
 from core.arp_scanner import scan_network, scan_host
 from utils.notifier import send_notification
 from utils.reporting import generate_pdf_report, export_to_json, export_to_csv
-# Дополняем импортом нашего нового модуля для Docker
 from core.fuzzer import run_go_fuzzer
+import ai_analyze  #новый 16-й файл
 
 # Импортирт pytest для внутренней обработки флага -m
 try:
@@ -23,34 +22,30 @@ async def main():
 
     parser = argparse.ArgumentParser(epilog=HELP_EXAMPLES, formatter_class=argparse.RawDescriptionHelpFormatter)
 
-    # Флаги
+    # блок аргументов
     parser.add_argument("-n", "--network", required=False)
     parser.add_argument("-f", "--format", choices=['pdf', 'json', 'csv'], help="Export format")
     parser.add_argument("-t", "--threads", type=int, default=200, help="Threads limit")
     parser.add_argument("--silent", action="store_true")
     parser.add_argument("--compare", action="store_true")
     parser.add_argument("--history", action="store_true", help="Show history")
-
-    # ЛОГИКА ДЛЯ ЗАПРОСА: добавил поддержку -m и сбор всех аргументов после него
     parser.add_argument("-m", nargs='*', help="Run pytest tests")
     parser.add_argument("-v", action="store_true", help="Verbose mode for pytest")
-
-    # ДОПОЛНЕНИЕ: флаг для активации Go-фаззера
     parser.add_argument("--fuzz", action="store_true", help="Run Go-fuzzer on detected web services")
+    parser.add_argument("--fuzz-ext", default="php,bak,zip,env,sql", help="Extensions for Go-fuzzer")
+    parser.add_argument("--fuzz-ignore", default="404,400", help="Statuses to ignore")
+    parser.add_argument("--fuzz-vhost", help="VHost header")
 
     args, unknown = parser.parse_known_args()
 
-    # 1. Если вызван -m (запуск тестов прямо из мейна)
+    # 1. Если вызван -m
     if args.m is not None:
         if pytest is None:
             print("[-] Error: pytest not installed. Run: pip install pytest")
             return
         print("[*] Launching internal tests...")
-        # Собирает аргументы: если после -m что-то есть (типа pytest tests/ -v), берет их
         test_args = args.m if args.m else ['tests/']
         if args.v: test_args.append('-v')
-
-        # Фикс путей для импортов внутри тестов
         sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
         pytest.main(test_args)
         return
@@ -79,7 +74,6 @@ async def main():
     # Сканирование
     results = await scan_network(args.network)
 
-    # ИСПРАВЛЕНИЕ 2: Если ARP (results) пустой и это не подсеть (нет /), запускает сканер портов напрямую
     if not results and "/" not in args.network:
         print("[!] No ARP response. Switching to Direct Scan mode...")
         direct_res = await scan_host(args.network)
@@ -100,9 +94,20 @@ async def main():
             if diff:
                 print(f"\n[!] DRIFT: +{len(diff['new'])} New, -{len(diff['gone'])} Gone, *{len(diff['changed'])} Changed")
 
+        # --- AI CONSOLE SUMMARY (Новый блок) ---
+        ai_brief = ""
+        if AI_ENABLED:
+            print("\n[*] Sentinel AI is thinking...")
+            summary_data = "\n".join([f"Host: {r['ip']}, OS: {r['os']}, Ports: {r['ports']}" for r in results])
+            ai_brief = ai_analyze.ask_ai_analysis(summary_data)
+            if ai_brief:
+                print(f"\n🤖 AI VERDICT:\n{ai_brief}\n")
+        # --------------------------------------
+
         # Экспорт
         file_base = f"report_{args.network.replace('/', '_')}"
         if args.format == 'pdf':
+            # В reporting.py уже добавил поддержку AI, так что PDF будет полным
             generate_pdf_report(results, args.network, f"{file_base}.pdf")
             print(f"[+] PDF report saved.")
         elif args.format == 'json':
@@ -114,26 +119,28 @@ async def main():
 
         # Уведомления
         if not args.silent:
+            # Добавил мнение ИИ в уведомление ТГ, если оно короткое
             report = f"📡 *Sentinel Report*\nTarget: `{args.network}`\n\n" + "\n".join([r['tg_row'] for r in results])
+            if ai_brief:
+                report += f"\n\n🤖 *AI Hint:* {ai_brief[:200]}..." # Ограничение длины для ТГ
             if diff and (diff['new'] or diff['changed']):
                 report += "\n\n⚠️ *Network changes detected!*"
             send_notification(report, 'telegram')
 
-        # ДОПОЛНЕНИЕ ЛОГИКИ: запуск Go-фаззера если поднят флаг --fuzz
+        # Запуск Go-фаззера
         if args.fuzz:
             print("\n🚀 Starting Go-fuzzer for web services...")
             for r in results:
-                # Проверка наличия веб-сервисов в найденных портах
                 if any(web_port in r['ports'] for web_port in ["80", "443", "8080", "HTTPS", "HTTP"]):
-                    # Определение протокола
                     protocol = "https" if "443" in r['ports'] or "HTTPS" in r['ports'] else "http"
                     target_url = f"{protocol}://{r['ip']}"
-
-                    # Запуск Docker-моста
-                    await run_go_fuzzer(target_url)
-
+                    await run_go_fuzzer(
+                        target_url,
+                        extensions=args.fuzz_ext,
+                        ignore_statuses=args.fuzz_ignore,
+                        vhost=args.fuzz_vhost
+                    )
     else:
-        # Убрал упоминание "Use sudo", так как теперь скрипт сам пробует Direct Scan
         print("\n[-] No hosts found. Target might be offline or protected by firewall.")
 
 if __name__ == "__main__":
@@ -141,4 +148,3 @@ if __name__ == "__main__":
         asyncio.run(main())
     except KeyboardInterrupt:
         print("\n[!] Stopped by user.")
-

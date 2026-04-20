@@ -30,10 +30,15 @@ func main() {
 	delay := flag.Int("d", 200, "Базовая задержка между запросами (мс)")
 	verbose := flag.Bool("v", false, "Подробный режим (выводить все попытки)")
 
+	// +++ ДОБАВЛЕНО: Новые флаги для максимального покрытия +++
+	extensions := flag.String("x", "", "Расширения через запятую (напр: php,bak,zip,old)")
+	vhost := flag.String("H", "", "Кастомный заголовок Host (для поиска скрытых поддоменов)")
+	ignoreStatuses := flag.String("is", "404,400", "Статусы для игнора (через запятую)")
+
 	// Настройка кастомного вывода помощи
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "=== Sentinel-Go Fuzzer v4.0 ===\n")
-		fmt.Fprintf(os.Stderr, "Автор: agitd\n\n")
+		fmt.Fprintf(os.Stderr, "Автор: Твой мощный проект на Go\n\n")
 		fmt.Fprintf(os.Stderr, "Параметры запуска:\n")
 		flag.PrintDefaults()
 	}
@@ -47,7 +52,6 @@ func main() {
 	}
 
 	// 2. Подготовка окружения
-	// Создание папки для отчетов, если ее нет
 	if _, err := os.Stat("reports"); os.IsNotExist(err) {
 		os.Mkdir("reports", 0755)
 	}
@@ -65,13 +69,17 @@ func main() {
 		go func(workerID int) {
 			defer wg.Done()
 
-			// Настройка клиента: таймаут и автоматические редиректы
+			// Настраиваем клиент: таймаут и автоматические редиректы
+			// Важно: мы не отключаем редиректы, чтобы видеть 301/302 статусы
 			client := &http.Client{
 				Timeout: 10 * time.Second,
+				// +++ ДОБАВЛЕНО: Останавливаем авто-редирект, чтобы ловить куда нас посылают +++
+				CheckRedirect: func(req *http.Request, via []*http.Request) error {
+					return http.ErrUseLastResponse
+				},
 			}
 
 			for word := range words {
-				// Внедрение Jitter (случайное отклонение времени), чтобы не палиться
 				jitter := 0
 				if *delay > 0 {
 					jitter = rand.Intn(*delay / 2)
@@ -83,11 +91,9 @@ func main() {
 					continue
 				}
 
-				// Формирует URL
 				baseURL := strings.TrimSuffix(*target, "/")
 				fullURL := baseURL + "/" + cleanWord
 
-				// Создает запрос
 				req, err := http.NewRequest("GET", fullURL, nil)
 				if err != nil {
 					continue
@@ -97,6 +103,11 @@ func main() {
 				req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36")
 				req.Header.Set("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8")
 
+				// +++ ДОБАВЛЕНО: Подмена Host (VHost) +++
+				if *vhost != "" {
+					req.Host = *vhost
+				}
+
 				resp, err := client.Do(req)
 				if err != nil {
 					if *verbose {
@@ -105,14 +116,34 @@ func main() {
 					continue
 				}
 
-				// Если включен подробный режим - выводит всё
 				if *verbose {
 					fmt.Printf("[Worker %d] %s - %d\n", workerID, fullURL, resp.StatusCode)
 				}
 
-				// Если нашёл 200 OK - сохраняет и выводит ярко
-				if resp.StatusCode == 200 {
-					fmt.Printf("[+++] НАЙДЕНО: %s\n", fullURL)
+				// +++ ДОБАВЛЕНО: Умная проверка статусов вместо жесткой привязки к 200 +++
+				isIgnored := false
+				for _, ig := range strings.Split(*ignoreStatuses, ",") {
+					if fmt.Sprintf("%d", resp.StatusCode) == strings.TrimSpace(ig) {
+						isIgnored = true
+						break
+					}
+				}
+
+				// Если статус не входит в список игнорируемых (например, не 404)
+				if !isIgnored {
+					// Оставляем твой "+++ НАЙДЕНО", но добавляем специфику для других статусов
+					if resp.StatusCode == 200 {
+						fmt.Printf("[+++] НАЙДЕНО (200): %s\n", fullURL)
+					} else if resp.StatusCode >= 300 && resp.StatusCode < 400 {
+						fmt.Printf("[%d REDIRECT] %s -> %s\n", resp.StatusCode, fullURL, resp.Header.Get("Location"))
+					} else if resp.StatusCode == 403 {
+						fmt.Printf("[403 FORBIDDEN] СКРЫТО, НО ЕСТЬ: %s\n", fullURL)
+					} else if resp.StatusCode == 500 {
+						fmt.Printf("[500 ERROR] ОШИБКА СЕРВЕРА (БАГ?): %s\n", fullURL)
+					} else {
+						fmt.Printf("[%d STATUS] НАЙДЕНО: %s\n", resp.StatusCode, fullURL)
+					}
+
 					results <- Result{
 						URL:        fullURL,
 						StatusCode: resp.StatusCode,
@@ -135,18 +166,31 @@ func main() {
 	}()
 
 	// 5. Распределение задач
+	// +++ ДОБАВЛЕНО: Парсим расширения в массив для генерации путей +++
+	extList := []string{""} // Всегда проверяем базовое слово (без расширения)
+	if *extensions != "" {
+		for _, p := range strings.Split(*extensions, ",") {
+			extList = append(extList, "."+strings.TrimSpace(p))
+		}
+	}
+
 	if *singlePath != "" {
-		// Режим проверки одного пути
-		words <- *singlePath
+		// +++ ДОБАВЛЕНО: Применяем расширения к одиночному пути +++
+		for _, ext := range extList {
+			words <- *singlePath + ext
+		}
 	} else if *wordlistPath != "" {
-		// Режим работы со словарем
 		file, err := os.Open(*wordlistPath)
 		if err != nil {
 			fmt.Printf("[!] Не удалось открыть словарь: %v\n", err)
 		} else {
 			scanner := bufio.NewScanner(file)
 			for scanner.Scan() {
-				words <- scanner.Text()
+				baseWord := scanner.Text()
+				// +++ ДОБАВЛЕНО: Множим каждое слово из словаря на все расширения +++
+				for _, ext := range extList {
+					words <- baseWord + ext
+				}
 			}
 			file.Close()
 		}
@@ -156,11 +200,9 @@ func main() {
 		return
 	}
 
-	// Закрывает канал задач и ожидаем воркеров
 	close(words)
 	wg.Wait()
 
-	// Закрывает результаты и ожидаем сохранения
 	close(results)
 	<-doneSaving
 
@@ -172,12 +214,11 @@ func main() {
 			if err != nil {
 				fmt.Printf("[!] Ошибка записи файла: %v\n", err)
 			} else {
-				fmt.Printf("\n[!] Сканирование завершено. Найдено объектов: %d\n", len(foundData))
+				fmt.Printf("\n[!] Сканирование завершено. Найдено объектов (не в игноре): %d\n", len(foundData))
 				fmt.Printf("[!] Отчет сохранен в: %s\n", *outputPath)
 			}
 		}
 	} else {
-		fmt.Println("\n[!] Поиск завершен. Ничего не найдено (статус 200).")
+		fmt.Println("\n[!] Поиск завершен. Ничего не найдено.")
 	}
 }
-
