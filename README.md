@@ -1,9 +1,10 @@
-# Sentinel Ultimate v13.0
+# Sentinel Ultimate v13.5
 
-**Sentinel Ultimate** is a high-speed, professional network intelligence and security auditing tool. Version 13.0 introduces a fully asynchronous scanning engine, an expanded signature database (200+ ports), and automated CVE vulnerability lookup.
+**Sentinel Ultimate** is a high-speed, professional network intelligence and security auditing tool. Version 13.5 introduces a local AI-powered analysis engine (Ollama integration), an expanded signature database (200+ ports), and automated CVE vulnerability lookup.
 
 ## Key Features
-- **OS Fingerprinting (v13.0):** Intelligent detection of Windows, Linux, macOS, IoT, and containers based on port patterns and weighted banner analysis.
+- **AI Security Analyst (v13.5):** Local neural network integration (Llama 3/Phi-3) for real-time security verdicts and automated threat assessment.
+- **OS Fingerprinting:** Intelligent detection of Windows, Linux, macOS, IoT, and containers based on port patterns and weighted banner analysis.
 - **Elite Service Detection (200+ Ports):** Comprehensive coverage of web services, databases, DevOps stacks, and security systems.
 - **Go-Powered Fuzzing:** Integrated high-speed directory fuzzer (Go-engine) running inside Docker for web service auditing.
 - **CVE Integration:** Real-time vulnerability lookup for detected service versions via API.
@@ -19,23 +20,28 @@ git clone https://github.com/agitd/sentinel-ultimate.git
 # 2. Enter the project folder
 cd sentinel-ultimate
 
-# 3. Install System Dependencies (Required for Scapy)
+# 3. Install AI Engine (Ollama)
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull llama3
+
+# 4. Install System Dependencies (Required for Scapy)
 sudo apt update && sudo apt install libpcap-dev
 
-# 4. Install Python dependencies
+# 5. Install Python dependencies
 pip install -r requirements.txt
+sudo pip3 install fpdf2
 
-# 5. Build Go-Fuzzer Engine (Docker)
+# 6. Build Go-Fuzzer Engine (Docker)
 cd fuzzer-engine
 docker build -t sentinel-fuzzer .
 cd ..
 
-# 6. Configure Environment
-# Rename .env.example to .env and fill in your API tokens:
+# 7. Configure Environment
+# Rename .env.example to .env and fill in your API tokens and AI settings:
 mv .env.example .env
-nano .env  # Fill in TG_TOKEN, TG_CHAT_ID, etc.
+nano .env  # Ensure AI_ENABLED=True and AI_MODEL=llama3 are set
 
-# 7. Run the scanner
+# 8. Run the scanner
 python3 main.py -n 192.168.1.0/24
 
 ## Usage (Launch Arguments)
@@ -54,14 +60,14 @@ python3 main.py -n 192.168.1.0/24
 
 ## Examples:
 
-# Standard scan with OS detection and reporting
+# Standard scan with AI verdict and console output
 python3 main.py -n 192.168.1.0/24
+
+# Scan with AI analysis and export results to PDF
+python3 main.py -n 192.168.1.0/24 -f pdf
 
 # Scan with automated Web Fuzzing (Go-Engine)
 python3 main.py -n 192.168.1.0/24 --fuzz
-
-# Scan and export results to PDF
-python3 main.py -n 10.0.0.0/16 -f pdf
 
 # Audit changes: See what changed since the last scan of this subnet
 python3 main.py -n 192.168.1.0/24 --compare
@@ -72,8 +78,8 @@ python3 main.py --history
 # Launch internal unit tests
 python3 main.py -m
 
-# Advanced: Mass scan from target list followed by automated security analysis
-python3 main.py -t targets.txt -w wordlist.txt && python3 analyze.py --input results/
+# Advanced: Target scan with increased timeout for slow AI responses
+python3 main.py -n 188.254.86.158
 
 ## OS Fingerprinting Support
 * **Linux:** Ubuntu, Debian, CentOS, RHEL, Fedora
@@ -85,4 +91,3 @@ python3 main.py -t targets.txt -w wordlist.txt && python3 analyze.py --input res
 
 ## Disclaimer
 This tool is developed for educational purposes and authorized security auditing only. The author is not responsible for any damage caused by misuse of this software. Always obtain permission before scanning any network.
-
