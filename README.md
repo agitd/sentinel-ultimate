@@ -64,7 +64,6 @@ python3 main.py -n 192.168.1.0/24
 
 # Standard scan with AI verdict and console output
 python3 main.py -n 192.168.1.0/24
-<img width="932" height="522" alt="start_scan" src="https://github.com/user-attachments/assets/6ea617fd-f12c-4905-8a15-c4c33dd55924" />
 
 # Scan with AI analysis and export results to PDF
 python3 main.py -n 192.168.1.0/24 -f pdf
