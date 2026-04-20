@@ -4,8 +4,8 @@
 
 ## Key Features
 - **AI Security Analyst (v13.5):** Local neural network integration (Llama 3/Phi-3) for real-time security verdicts and automated threat assessment.
-- <img width="932" height="522" alt="start_scan" src="https://github.com/user-attachments/assets/e4772c1f-c561-4640-a316-11b0fee2bdba" />
-- <img width="1897" height="486" alt="ai_scan_verdict" src="https://github.com/user-attachments/assets/007f7535-4ce0-4c17-9d61-beee347210a2" />
+- **Start Scan** <img width="932" height="522" alt="start_scan" src="https://github.com/user-attachments/assets/e4772c1f-c561-4640-a316-11b0fee2bdba" />
+- ** AI Verdict** <img width="1897" height="486" alt="ai_scan_verdict" src="https://github.com/user-attachments/assets/007f7535-4ce0-4c17-9d61-beee347210a2" />
 - **OS Fingerprinting:** Intelligent detection of Windows, Linux, macOS, IoT, and containers based on port patterns and weighted banner analysis.
 - **Elite Service Detection (200+ Ports):** Comprehensive coverage of web services, databases, DevOps stacks, and security systems.
 - **Go-Powered Fuzzing:** Integrated high-speed directory fuzzer (Go-engine) running inside Docker for web service auditing.
