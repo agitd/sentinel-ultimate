@@ -1,5 +1,5 @@
 # Sentinel Ultimate v13.5
-
+# Required: Install Olloama and run ollama pull llama3 before starting the scanner!!!!!!!
 **Sentinel Ultimate** is a high-speed, professional network intelligence and security auditing tool. Version 13.5 introduces a local AI-powered analysis engine (Ollama integration), an expanded signature database (200+ ports), and automated CVE vulnerability lookup.
 
 ## Key Features
