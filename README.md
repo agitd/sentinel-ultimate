@@ -87,6 +87,6 @@ python3 -m pytest tests/test_scanner.py -v
 * **Infrastructure:** Cisco, Ubiquiti, MikroTik, Fortinet
 * **Containers:** Docker, Kubernetes nodes
 * **IoT:** Printers (HP, Brother), CUPS, IPP devices
-* 
+
 ## Disclaimer
 This tool is developed for educational purposes and authorized security auditing only. The author is not responsible for any damage caused by misuse of this software. Always obtain permission before scanning any network.
