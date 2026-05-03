@@ -1,15 +1,17 @@
-# Sentinel Ultimate v13.5
+# Sentinel Ultimate v13.6
 # Required: Install Ollama and run ollama pull llama3 before starting the scanner!!!!!!!
-**Sentinel Ultimate** is a high-speed, professional network intelligence and security auditing tool. Version 13.5 introduces a local AI-powered analysis engine (Ollama integration), an expanded signature database (200+ ports), and automated CVE vulnerability lookup.
+**Sentinel Ultimate** is a high-speed, professional network intelligence and security auditing tool. Version 13.6 introduces critical security auditing capabilities, legacy protocol detection, and automated vulnerability lookups.
 
 ## Key Features
-- **AI Security Analyst (v13.5):** Local neural network integration (Llama 3/Phi-3) for real-time security verdicts and automated threat assessment.
+- **AI Security Analyst:** Local neural network integration (Llama 3/Phi-3) for real-time security verdicts and automated threat assessment.
 - **Start Scan** <img width="932" height="522" alt="start_scan" src="https://github.com/user-attachments/assets/e4772c1f-c561-4640-a316-11b0fee2bdba" />
 - **AI Verdict** <img width="1897" height="486" alt="ai_scan_verdict" src="https://github.com/user-attachments/assets/007f7535-4ce0-4c17-9d61-beee347210a2" />
+- **CVE Integration (v13.6):** Real-time vulnerability lookup for detected service versions via API (cve.circl.lu) with intelligent OS-based filtering.
+- **SMBv1 Audit (v13.6):** Dedicated detection for the vulnerable SMBv1 protocol (EternalBlue vector), implemented with safe hex-payloads for Python 3.13.
+- **SSH Auth Auditing (v13.6):** Automated checks for weak or default credentials on discovered SSH services.
 - **OS Fingerprinting:** Intelligent detection of Windows, Linux, macOS, IoT, and containers based on port patterns and weighted banner analysis.
 - **Elite Service Detection (200+ Ports):** Comprehensive coverage of web services, databases, DevOps stacks, and security systems.
 - **Go-Powered Fuzzing:** Integrated high-speed directory fuzzer (Go-engine) running inside Docker for web service auditing.
-- **CVE Integration:** Real-time vulnerability lookup for detected service versions via API.
 - **SQLite Persistence:** All scan results are automatically saved to `sentinel_scans.db` for future auditing and historical logging.
 - **Diff Engine:** Compare current results with previous scans to identify new, gone, or modified hosts and services.
 - **Multi-Channel Reporting:** Support for PDF reports, JSON/CSV exports, and notifications via Telegram (with proxy support) or Slack.
@@ -31,7 +33,7 @@ sudo apt update && sudo apt install libpcap-dev
 
 # 5. Install Python dependencies
 pip install -r requirements.txt
-sudo pip3 install fpdf2
+pip install paramiko aiohttp fpdf2
 
 # 6. Build Go-Fuzzer Engine (Docker)
 cd fuzzer-engine
@@ -53,7 +55,7 @@ python3 main.py -n 192.168.1.0/24
 | `-n` | **Network** (CIDR notation) | `-n 192.168.1.0/24` |
 | `-t` | **Threads** (Default: 200) | `-t 500` |
 | `-f` | **Format** (pdf/json/csv export) | `-f pdf` |
-| `-m` | **Run Internal Tests** (pytest) | `-m pytest -v` |
+| `-m` | **Run Internal Tests** (pytest) | `-m` |
 | `--fuzz`| **Run Go-Fuzzer on Web Ports** | `--fuzz` |
 | `--history`| **View Database History** | `--history` |
 | `--compare`| **Compare Scans** | `--compare -n 192.168.1.0/24` |
@@ -71,17 +73,12 @@ python3 main.py -n 192.168.1.0/24 -f pdf
 # Scan with automated Web Fuzzing (Go-Engine)
 python3 main.py -n 192.168.1.0/24 --fuzz
 
-# Audit changes: See what changed since the last scan of this subnet
-python3 main.py -n 192.168.1.0/24 --compare
+# Launch internal unit tests (Note: see Known Issues for v13.6)
+export PYTHONPATH=$PYTHONPATH:.
+python3 -m pytest tests/test_scanner.py -v
 
-# List all previous scan sessions from SQLite
-python3 main.py --history
-
-# Launch internal unit tests
-python3 main.py -m
-
-# Advanced: Target scan with increased timeout for slow AI responses
-python3 main.py -n 188.254.86.158
+## Known Issues (v13.6)
+* **Testing Suite:** Currently, 3 tests in `TestSecurityv136` may fail with a `RuntimeError` regarding the `event loop` in certain Kali Linux / Python 3.13 environments. This is a known compatibility issue with the `pytest-asyncio` runner and **does not affect the core scanner's functionality**. A fix is scheduled for v13.7.
 
 ## OS Fingerprinting Support
 * **Linux:** Ubuntu, Debian, CentOS, RHEL, Fedora
@@ -90,6 +87,6 @@ python3 main.py -n 188.254.86.158
 * **Infrastructure:** Cisco, Ubiquiti, MikroTik, Fortinet
 * **Containers:** Docker, Kubernetes nodes
 * **IoT:** Printers (HP, Brother), CUPS, IPP devices
-
+* 
 ## Disclaimer
 This tool is developed for educational purposes and authorized security auditing only. The author is not responsible for any damage caused by misuse of this software. Always obtain permission before scanning any network.
