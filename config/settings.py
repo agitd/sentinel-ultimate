@@ -1,7 +1,7 @@
 import os
 from typing import Dict, Any
 
-VERSION = "13.5"
+VERSION = "13.6"
 DB_FILE = "sentinel_scans.db"
 DEFAULT_THREADS = 100
 
