@@ -1,9 +1,11 @@
-# Sentinel Ultimate v13.6
+# Sentinel Ultimate v13.6.1
 # Required: Install Ollama and run ollama pull llama3 before starting the scanner!!!!!!!
-**Sentinel Ultimate** is a high-speed, professional network intelligence and security auditing tool. Version 13.6 introduces critical security auditing capabilities, legacy protocol detection, and automated vulnerability lookups.
+
+**Sentinel Ultimate** is a high-speed, professional network intelligence and security auditing tool. Version 13.6.1 introduces critical security auditing capabilities, legacy protocol detection, and automated vulnerability lookups.
 
 ## Key Features
 - **AI Security Analyst:** Local neural network integration (Llama 3/Phi-3) for real-time security verdicts and automated threat assessment.
+- **[NEW] AI Self-Learning Engine:** Automated dataset updates and model retraining via `--update-ai` to keep risk scores synchronized with global threat databases.
 - **Start Scan** <img width="932" height="522" alt="start_scan" src="https://github.com/user-attachments/assets/e4772c1f-c561-4640-a316-11b0fee2bdba" />
 - **AI Verdict** <img width="1897" height="486" alt="ai_scan_verdict" src="https://github.com/user-attachments/assets/007f7535-4ce0-4c17-9d61-beee347210a2" />
 - **CVE Integration (v13.6):** Real-time vulnerability lookup for detected service versions via API (cve.circl.lu) with intelligent OS-based filtering.
@@ -33,7 +35,6 @@ sudo apt update && sudo apt install libpcap-dev
 
 # 5. Install Python dependencies
 pip install -r requirements.txt
-pip install paramiko aiohttp fpdf2
 
 # 6. Build Go-Fuzzer Engine (Docker)
 cd fuzzer-engine
@@ -56,6 +57,7 @@ python3 main.py -n 192.168.1.0/24
 | `-t` | **Threads** (Default: 200) | `-t 500` |
 | `-f` | **Format** (pdf/json/csv export) | `-f pdf` |
 | `-m` | **Run Internal Tests** (pytest) | `-m` |
+| `--update-ai`| **[NEW] Retrain AI Model** | `--update-ai` |
 | `--fuzz`| **Run Go-Fuzzer on Web Ports** | `--fuzz` |
 | `--history`| **View Database History** | `--history` |
 | `--compare`| **Compare Scans** | `--compare -n 192.168.1.0/24` |
@@ -67,18 +69,21 @@ python3 main.py -n 192.168.1.0/24
 # Standard scan with AI verdict and console output
 python3 main.py -n 192.168.1.0/24
 
+# [NEW] Update AI dataset and retrain risk model
+python3 main.py --update-ai
+
 # Scan with AI analysis and export results to PDF
 python3 main.py -n 192.168.1.0/24 -f pdf
 
 # Scan with automated Web Fuzzing (Go-Engine)
 python3 main.py -n 192.168.1.0/24 --fuzz
 
-# Launch internal unit tests (Note: see Known Issues for v13.6)
+# Launch internal unit tests
 export PYTHONPATH=$PYTHONPATH:.
 python3 -m pytest tests/test_scanner.py -v
 
 ## Known Issues (v13.6)
-* **Testing Suite:** Currently, 3 tests in `TestSecurityv136` may fail with a `RuntimeError` regarding the `event loop` in certain Kali Linux / Python 3.13 environments. This is a known compatibility issue with the `pytest-asyncio` runner and **does not affect the core scanner's functionality**. A fix is scheduled for v13.7.
+* **Testing Suite:** Currently, 3 tests in `TestSecurityv136` may fail with a `RuntimeError` regarding the `event loop` in certain Kali Linux / Python 3.13 environments. This is a known compatibility issue with the `pytest-asyncio` runner and **does not affect the core scanner's functionality**. A fix is scheduled for v13.6.2.
 
 ## OS Fingerprinting Support
 * **Linux:** Ubuntu, Debian, CentOS, RHEL, Fedora
@@ -90,3 +95,5 @@ python3 -m pytest tests/test_scanner.py -v
 
 ## Disclaimer
 This tool is developed for educational purposes and authorized security auditing only. The author is not responsible for any damage caused by misuse of this software. Always obtain permission before scanning any network.
+
+

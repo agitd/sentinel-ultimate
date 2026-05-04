@@ -1,0 +1,1007 @@
+[
+  {
+    "url": "http://scanme.nmap.org/.hta.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.hta",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.ht_wsr.txt.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.hta.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.ht_wsr.txt.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.ht_wsr.txt.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.ht_wsr.txt",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.hta.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.ht_wsr.txt.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-dev.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.ht_wsr.txt.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.hta.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-local.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-local.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-local.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-dev.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-dev.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-dev.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.hta.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-dev.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-marco.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.bak1.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.bak1.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-dev",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.bak1",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.bak.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-marco.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.bak.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.BAK.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.orig.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.old.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-local.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.bak1.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.old",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.orig.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.bak.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-marco.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.orig",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.BAK.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.sample",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.old.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.bak.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-marco.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.old.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_extra",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.orig.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-marco",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-local",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.BAK.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.orig.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.sample.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.sample.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.sample.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.txt.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.sample.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.BAK.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.save.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.bak.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_extra.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.txt.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.bak1.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_extra.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.sample.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.txt",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_extra.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.orig.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.txt.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.save.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.txt.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_extra.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.save.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_extra.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-marco.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.save.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.bak1.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.save",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.save.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.old.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.BAK",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess-local.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.old.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.BAK.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess.txt.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess~.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessOLD2.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessOLD.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_sc.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htgroup.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.httr-oauth",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_orig",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd_test.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessOLD.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd_test.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess~.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd-old.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessBAK",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessBAK.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd-old.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htusers.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:32Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessOLD2.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd-old.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessBAK.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessOLD",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessOLD.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessOLD2.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htusers.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess~.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd_test",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htusers.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.httr-oauth.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htgroup.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessOLD2.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_sc.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htgroup.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd_test.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessOLD2.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_sc",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htgroup.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_orig.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswds",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htusers.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_orig.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswds.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess~.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_sc.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htusers.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswds.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessOLD2",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_orig.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswds.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_sc.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessOLD.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_sc.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess~.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessOLD.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessBAK.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessBAK.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_orig.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd-old.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.httr-oauth.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccessBAK.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess~",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.httr-oauth.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htaccess_orig.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htgroup.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.httr-oauth.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd-old",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd_test.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.httr-oauth.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htgroup",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd-old.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd_test.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswds.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswd.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htusers",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.htpasswds.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:33Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/text-base/index.php.svn-base.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/entries.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn",
+    "status_code": 301,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/text-base/index.php.svn-base.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/text-base/.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/text-base/index.php.svn-base",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/text-base/.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/entries",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/entries.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/entries.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/text-base/.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/all-wcprops",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/all-wcprops.bak",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/all-wcprops.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/text-base/.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/all-wcprops.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/entries.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/entries.php",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/text-base/",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/all-wcprops.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/text-base/index.php.svn-base.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/all-wcprops.zip",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/text-base/.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/text-base/index.php.svn-base.env",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/.svn/text-base/index.php.svn-base.sql",
+    "status_code": 403,
+    "timestamp": "2026-05-03T23:51:52Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/images/",
+    "status_code": 200,
+    "timestamp": "2026-05-03T23:54:43Z"
+  },
+  {
+    "url": "http://scanme.nmap.org/index.html",
+    "status_code": 200,
+    "timestamp": "2026-05-03T23:54:46Z"
+  }
+]

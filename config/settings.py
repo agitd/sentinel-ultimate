@@ -1,7 +1,7 @@
 import os
 from typing import Dict, Any
 
-VERSION = "13.6"
+VERSION = "13.6.1"
 DB_FILE = "sentinel_scans.db"
 DEFAULT_THREADS = 100
 
@@ -16,6 +16,7 @@ AI_ENABLED = os.getenv("AI_ENABLED", "True").lower() == "true"
 AI_PROVIDER = "ollama"
 AI_API_URL = "http://localhost:11434/api/generate"
 AI_MODEL = "llama3"
+AI_RISK_THRESHOLD = 0.7  # Порог, после которого вызывается Лама
 # ----------------------------------------------------------
 
 PORTS_TO_CHECK: Dict[int, str] = {
@@ -113,6 +114,9 @@ HELP_EXAMPLES = """
 
 📊 COMPARE SCANS:
   python3 main.py -n 192.168.1.0/24 --compare
+
+🧠 AI BRAIN RETRAINING:
+  python3 main.py --update-ai
 
 🧪 RUN TESTS:
   python3 -m pytest tests/ -v

@@ -1,12 +1,14 @@
-import argparse, asyncio, os, logging, sys
+import argparse, asyncio, os, logging, sys, re
+sys.path.append(os.path.join(os.getcwd(), "venv/lib/python3.13/site-packages"))
 from dotenv import load_dotenv
-from config.settings import BANNER, HELP_EXAMPLES, AI_ENABLED # Добавил AI_ENABLED
+from config.settings import BANNER, HELP_EXAMPLES, AI_ENABLED
 from database.manager import ScanDatabase
 from core.arp_scanner import scan_network, scan_host
 from utils.notifier import send_notification
 from utils.reporting import generate_pdf_report, export_to_json, export_to_csv
 from core.fuzzer import run_go_fuzzer
-import ai_analyze  # новый 16-й файл
+from core.fast_ai import get_risk_score
+import ai_analyze
 
 # Импортирует pytest для внутренней обработки флага -m
 try:
@@ -35,8 +37,23 @@ async def main():
     parser.add_argument("--fuzz-ext", default="php,bak,zip,env,sql", help="Extensions for Go-fuzzer")
     parser.add_argument("--fuzz-ignore", default="404,400", help="Statuses to ignore")
     parser.add_argument("--fuzz-vhost", help="VHost header")
+    # НОВЫЙ АРГУМЕНТ ДЛЯ АВТООБУЧЕНИЯ
+    parser.add_argument("--update-ai", action="store_true", help="Update AI database and retrain model")
 
     args, unknown = parser.parse_known_args()
+
+    # --- ЭТАП 1: ЛОГИКА ОБНОВЛЕНИЯ AI ---
+    if args.update_ai:
+        print("[*] Starting Automated AI Update Pipeline...")
+        try:
+            from core.auto_train import full_auto_update
+            full_auto_update()
+            print("[+] AI Optimization complete. You can now run scans with the new model.")
+        except ImportError:
+            print("[-] Error: core/auto_train.py not found. Please create the update scripts first.")
+        except Exception as e:
+            print(f"[-] Update failed: {e}")
+        return
 
     # 1. Если вызван -m
     if args.m is not None:
@@ -66,7 +83,7 @@ async def main():
         return
 
     if not args.network:
-        print("[-] Error: -n <network> is required. Use -m to run tests.")
+        print("[-] Error: -n <network> is required. Use -m to run tests or --update-ai to train.")
         return
 
     # Очистка и баннер
@@ -74,7 +91,7 @@ async def main():
     else: os.system('clear')
     print(BANNER)
 
-    # Сканирование (Отказоустойчивость V13.5)
+    # Сканирование (Отказоустойчивость)
     try:
         results = await scan_network(args.network)
     except Exception as e:
@@ -112,18 +129,33 @@ async def main():
             except Exception as e:
                 print(f"[-] Drift analysis error: {e}")
 
-        # --- AI CONSOLE SUMMARY (Новый блок) ---
+        # --- AI CONSOLE SUMMARY (Интеллектуальная сортировка) ---
         ai_brief = ""
         if AI_ENABLED:
             print("\n[*] Sentinel AI is thinking...")
             try:
-                summary_data = "\n".join([f"Host: {r['ip']}, OS: {r['os']}, Ports: {r['ports']}" for r in results])
-                ai_brief = ai_analyze.ask_ai_analysis(summary_data)
+                all_found_ports = []
+                for r in results:
+                    # Чистка портов от скобок и текста (22(SSH) => 22)
+                    clean_ports = re.findall(r'\d+', str(r['ports']))
+                    all_found_ports.extend(clean_ports)
+
+                # Нейронка считает риск
+                risk_score = get_risk_score(all_found_ports)
+
+                if risk_score >= 0.7:
+                    print(f"[!] High Risk detected ({risk_score:.2f}). Consulting Llama 3 for deep analysis...")
+                    summary_data = "\n".join([f"Host: {r['ip']}, OS: {r['os']}, Ports: {r['ports']}" for r in results])
+                    ai_brief = ai_analyze.ask_ai_analysis(summary_data)
+                else:
+                    print(f"[-] Low Risk ({risk_score:.2f}). Skip heavy AI analysis.")
+                    ai_brief = f"Risk Score: {risk_score:.2f}. No critical threats identified."
+
                 if ai_brief:
                     print(f"\n🤖 AI VERDICT:\n{ai_brief}\n")
             except Exception as e:
                 print(f"[-] AI Analysis error: {e}")
-        # --------------------------------------
+        # -------------------------------------------------------------
 
         # Экспорт
         file_base = f"report_{args.network.replace('/', '_')}"
@@ -143,12 +175,9 @@ async def main():
         # Уведомления
         if not args.silent:
             try:
-                # Добавил мнение ИИ в уведомление ТГ, если оно короткое
                 report = f"📡 *Sentinel Report*\nTarget: `{args.network}`\n\n" + "\n".join([r['tg_row'] for r in results])
                 if ai_brief:
-                    report += f"\n\n🤖 *AI Hint:* {ai_brief[:200]}..." # Ограничение длины для ТГ
-                if diff and (diff['new'] or diff['changed']):
-                    report += "\n\n⚠️ *Network changes detected!*"
+                    report += f"\n\n🤖 *AI Hint:* {ai_brief[:200]}..."
                 send_notification(report, 'telegram')
             except Exception as e:
                 print(f"[-] Notifier error: {e}")
@@ -161,23 +190,15 @@ async def main():
                     if any(web_port in r['ports'] for web_port in ["80", "443", "8080", "HTTPS", "HTTP"]):
                         protocol = "https" if "443" in r['ports'] or "HTTPS" in r['ports'] else "http"
                         target_url = f"{protocol}://{r['ip']}"
-                        await run_go_fuzzer(
-                            target_url,
-                            extensions=args.fuzz_ext,
-                            ignore_statuses=args.fuzz_ignore,
-                            vhost=args.fuzz_vhost
-                        )
+                        await run_go_fuzzer(target_url, extensions=args.fuzz_ext, ignore_statuses=args.fuzz_ignore, vhost=args.fuzz_vhost)
                 except Exception as e:
                     print(f"[-] Fuzzer error for {r['ip']}: {e}")
     else:
-        print("\n[-] No hosts found. Target might be offline or protected by firewall.")
+        print("\n[-] No hosts found.")
 
 if __name__ == "__main__":
     try:
         asyncio.run(main())
-    except KeyboardInterrupt:
-        print("\n[!] Stopped by user.")
     except Exception as e:
         print(f"\n[!] Unexpected error: {e}")
-
 
