@@ -4,9 +4,9 @@ import io
 
 def fetch_fresh_data():
     print("[*] Collecting fresh port data from remote sources...")
-    # 1. База nmap-services (твоя база)
+    # 1. База nmap-services
     url_nmap = "https://raw.githubusercontent.com/nmap/nmap/master/nmap-services"
-    # 2. CISA Known Exploited Vulnerabilities (Реальные угрозы)
+    # 2. CISA Known Exploited Vulnerabilities
     url_cisa = "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
 
     data = []
