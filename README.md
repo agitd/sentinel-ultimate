@@ -36,8 +36,7 @@ sudo apt update && sudo apt install libpcap-dev
 # 5. Install Python dependencies
 pip install -r requirements.txt
 
-# 5.1 Initialize AI Brain
-Required for first run.
+# 5.1 Initialize AI Brain (Required for first run)
 python3 main.py --update-ai
 
 # 6. Build Go-Fuzzer Engine (Docker)
